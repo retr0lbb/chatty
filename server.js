@@ -11,6 +11,22 @@ app.engine('handlebars', exphbs.engine({
 app.set('view engine', 'handlebars'); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public')); 
+
+
+
+const ws = new WebSocket("ws://localhost:8080");
+
+ws.on("open", () => {
+    console.log("✅ Conectado ao servidor!");
+
+    const msg = new Message();
+    msg.sendMessageToChat(ws, "Olá galera!", "canal-geral");
+});
+
+// Se chegar alguma resposta do servidor
+ws.on("message", (data) => {
+    console.log("📩 Mensagem recebida:", data.toString());
+});
  
 // Rotas 
 app.get('/', tarefasController.exibirLista); 

@@ -1,6 +1,6 @@
 
 const TarefasModel = require('../models/tarefas-model'); 
- 
+
 module.exports = { 
     exibirLista(req, res) { 
         const tarefas = TarefasModel.listar(); 
